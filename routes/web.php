@@ -13,6 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/test/laravel', function () {
     return view('welcome');
+})->name('main');
+
+Route::get('/url', function (){
+    return 'Route URL:' .route('main',['page'=>25, 'test'=> true]);
+});
+
+Route::prefix('admin')->group(function () {
+    Route::get('/users', function () {
+        // Matches The "/admin/users" URL
+    });
+});
+
+Route::name('admin.')->group(function () {
+    Route::get('/users', function () {
+        // Route assigned name "admin.users"...
+    })->name('users');
 });
