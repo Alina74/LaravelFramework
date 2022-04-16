@@ -12,11 +12,53 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function () {
+    return view('Welcome');
+});
 
-Route::get('/test/laravel', function () {
-    return view('welcome');
-})->name('main');
+Route::get('/my-name', function () {
+    return ('Alina Shakirova');
+});
 
+Route::get('/my-friend', function () {
+    return ('Sanya');
+});
+
+Route::get('/get-friend/{name}', function ($name) {
+    return "$name";
+});
+
+Route::get('/my-city/{city}', function ($city) {
+    return "$city";
+});
+
+Route::get('/level/{lvl}', function ($lvl) {
+    if($lvl<=25){
+        return 'Новичок';
+    }
+    if($lvl>=26 && $lvl<=50){
+        return 'Специалист';
+    }
+    if($lvl>=51 && $lvl<=75){
+        return 'Босс';
+    }
+    if($lvl>=76 && $lvl<=98){
+        return 'Старик';
+    }
+    else {
+        return 'Король';
+    }
+});
+
+Route::get('/working/{name}/{date}', function ($name, $date) {
+    return "$name - $date";
+});
+
+Route::get('/power/{name}', function ($name) {
+    return "$name";
+});
+
+/*
 Route::get('/url', function (){
     return 'Route URL:' .route('main',['page'=>25, 'test'=> true]);
 });
@@ -32,3 +74,4 @@ Route::name('admin.')->group(function () {
         // Route assigned name "admin.users"...
     })->name('users');
 });
+*/
