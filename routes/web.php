@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,66 +13,124 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('Welcome');
-});
-
-Route::get('/my-name', function () {
-    return ('Alina Shakirova');
-});
-
-Route::get('/my-friend', function () {
-    return ('Sanya');
-});
-
-Route::get('/get-friend/{name}', function ($name) {
-    return "$name";
-});
-
-Route::get('/my-city/{city}', function ($city) {
-    return "$city";
-});
-
-Route::get('/level/{lvl}', function ($lvl) {
-    if($lvl<=25){
-        return 'Новичок';
-    }
-    if($lvl>=26 && $lvl<=50){
-        return 'Специалист';
-    }
-    if($lvl>=51 && $lvl<=75){
-        return 'Босс';
-    }
-    if($lvl>=76 && $lvl<=98){
-        return 'Старик';
-    }
-    else {
-        return 'Король';
-    }
-});
-
-Route::get('/working/{name}/{date}', function ($name, $date) {
-    return "$name - $date";
-});
-
-Route::get('/power/{name}', function ($name) {
-    return "$name";
-});
-
 /*
-Route::get('/url', function (){
-    return 'Route URL:' .route('main',['page'=>25, 'test'=> true]);
-});
-
-Route::prefix('admin')->group(function () {
-    Route::get('/users', function () {
-        // Matches The "/admin/users" URL
-    });
-});
-
-Route::name('admin.')->group(function () {
-    Route::get('/users', function () {
-        // Route assigned name "admin.users"...
-    })->name('users');
+Route::get('/', function () {
+    return view('welcome');
 });
 */
+
+/*
+//1 Задание
+Route::get('/my-name', function () {
+    return 'Роденко Александр Витальевич';
+});
+
+//2 Задание
+Route::get('/my-friend', function () {
+    return 'Алина Шакирова Шамильевна';
+});
+
+//3 Задание
+Route::get('/get-friend/{name?}', function ($name = null) {
+    return $name;
+});
+
+//4 Задание
+Route::get('/city/{name?}', function ($name = null) {
+    return $name;
+});
+
+//5 Задание
+Route::get('/level/{lvl}', function ($lvl) {
+    if ($lvl <= 26){
+        return 'Уровень новичок ' .$lvl;
+    }
+    elseif ($lvl <= 50 ){
+        return 'Уровень специалист ' .$lvl;
+    }
+    elseif ($lvl <= 75){
+        return 'Уровень босс ' .$lvl;
+    }
+    elseif ($lvl <= 98){
+        return 'Уровень старик ' .$lvl;
+    }
+    else{
+        return 'Уровень король ' .$lvl;
+    }
+});
+
+//6 Задание
+Route::get('/working/{name}/{date}', function ($name, $date) {
+    return 'Название проекта: ' .$name .' '. 'Дата исполнения: '. $date;
+});
+
+//7 Задание
+Route::get('/power/{name}', function ($name) {
+    return \route('power', ['name' => $name]);
+})->name('power');
+
+//8 Задание
+Route::prefix('/admin')->group(function (){
+    Route::get('/login', function(){
+        return \route('login');
+    })->name('login');
+    Route::get('/logout', function(){
+        return \route('logout');
+    })->name('logout');
+
+    Route::get('/info', function(){
+        return \route('info');
+    })->name('info');
+
+    Route::get('/color', function(){
+        return \route('color');
+    })->name('color');
+});
+
+//9 Задание
+Route::redirect('/admin/web', '/admin/color');
+
+//10 Задание
+Route::get('/color/{hex}', function ($hex){
+    return "Цвет: {$hex}";
+})->where(['hex' => '[0-9A-F]{6}']);
+*/
+
+/*
+//
+Route::get('my-route', [TestController::class, 'lessonOne']);
+Route::get('data', [TestController::class, 'lessonTow']);
+//
+Route::get('quest1', [TestController::class, 'quest1']);
+
+Route::get('/quest2/{name?}', [TestController::class, 'quest2']);
+
+Route::get('/quest3/{name}/{text}', [TestController::class, 'quest3']);
+
+Route::get('/quest4', [TestController::class, 'quest4']);
+
+Route::get('/quest5/{a}/{b}', [TestController::class, 'quest5']);
+
+Route::get('/quest6/{cipher}', [TestController::class, 'quest6']);
+
+//
+Route::get('template/{detach}', [TestController::class, 'lessonTemplateOne']);
+//
+
+Route::get('quest21', [TestController::class, 'quest21']);
+
+Route::get('quest22/{detach}', [TestController::class, 'quest22']);
+
+Route::get('quest23/{detach}', [TestController::class, 'quest23']);
+
+Route::get('quest24', [TestController::class, 'quest24']);
+
+Route::get('quest25', [TestController::class, 'quest25']);
+
+Route::get('quest26', [TestController::class, 'quest26']);
+*/
+Route::view('/', 'site.index')->name('main');
+Route::view('/home', 'site.home')->name('home');
+Route::view('/news', 'site.news')->name('news');
+Route::view('/auth', 'site.auth')->name('auth');
+Route::view('/user', 'site.user')->name('user');
